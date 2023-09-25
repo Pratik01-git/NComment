@@ -12,7 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-const DB = "mongodb://127.0.0.1:27017/nested";
+const DB = process.env.db;
 mongoose.connect(DB, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false}).then(() => {
     console.log("connection successful");
 }).catch((err) => console.log(err));
@@ -29,6 +29,7 @@ app.use("/comments", commentRoutes);
 // }
 
 const PORT = process.env.PORT || 4000;
+
 app.listen(PORT, () => {
     console.log(`Server started on port ${PORT}`);
 });
